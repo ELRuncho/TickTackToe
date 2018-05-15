@@ -1,5 +1,6 @@
 :root{
-	--back:#b3b3b3;
+	--back1:#fff;
+	--back2:#fff;
 	}
 
 .body{
@@ -15,12 +16,7 @@
  	-webkit-box-shadow: 0px 0px 40px rgba(33,62,83,0.3) inset, 0px 0px 33px #486685;
 
 }
-/*	--back:#b3b3b3;
-	--bump:5px;
-	--void:0px;
-	--shade:#595959;
-	--test:"inset";
-*/
+
 .slot{
 	display: flex;
 	border-radius: 5px;
@@ -31,13 +27,78 @@
 	-moz-box-shadow: inset 0px 0px 11px #595959;
  	-webkit-box-shadow: inset 0px 0px 11px #595959;
 }
-.usedSlot{
+.usedSlot1{
 	display: flex;
 	border-radius: 5px;
 	justify-content: center;
 	align-items: center;
-	background-color: var(--back);
+	background-color: var(--back1);
 	box-shadow: 0px 0px 7px #262626;
 	-moz-box-shadow: 0px 0px 7px #262626;
 	-webkit-box-shadow: 0px 0px 7px #262626;
+}
+.usedSlot2{
+	display: flex;
+	border-radius: 5px;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--back2);
+	box-shadow: 0px 0px 7px #262626;
+	-moz-box-shadow: 0px 0px 7px #262626;
+	-webkit-box-shadow: 0px 0px 7px #262626;
+}
+.modal{
+	display: block;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top:0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background: rgb(0,0,0);
+	background-color: rgba(0,0,0,0.4);
+}
+.modalHeader{
+	padding: 2px 16px;
+	background-color: #5cb85c;
+	color: white;
+}
+.modalBody{
+	padding: 2px 16px;
+}
+.modalContent{
+	background-color: #fefefe;
+	margin: 15% auto;
+	padding: 20px;
+	width: 80%;
+}
+.cross{
+	display: flex;
+	border-radius: 5px;
+	justify-content: center;
+	align-items: center;
+	background-color: #ff3333;
+	box-shadow: 0px 0px 7px #262626;
+	-moz-box-shadow: 0px 0px 7px #262626;
+	-webkit-box-shadow: 0px 0px 7px #262626;
+}
+.circle{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 5px;
+	background-color: #0073e6;
+	box-shadow: 0px 0px 7px #262626;
+	-moz-box-shadow: 0px 0px 7px #262626;
+	-webkit-box-shadow: 0px 0px 7px #262626;
+}
+
+.slot:hover,
+.slot:focus,
+.cross:hover,
+.cross:focus,
+.circle:hover,
+.circle:focus{
+	cursor: pointer;
 }
