@@ -66,7 +66,7 @@ function noOneWins(){
 }
 
 function bestSlot(){
-	return emptySlots()[0];
+	return minimax(initialBoard,com).index;
 }
 
 function turnClick(slot){
@@ -106,4 +106,59 @@ function gameOver(win){
 		slots[i].removeEventListener('click', turnClick, false);
 	}
 	declareWiner(win.player==huPlayer ? "You Win." : "Skynet Wins.")
+}
+
+function minimax(newBoard, player){
+	var availSpots=emptySlots();
+	
+	if (verifyWin(newBoard, huPlayer)){
+		console.log("-10 here");
+		return {score: -10};
+	}else if(verifyWin(newBoard, com)){
+		console.log("10 here");
+		return {score: 10};
+	}else if(availSpots.length===0){
+		console.log("0 here");
+		return {score: 0};
+	}
+
+	var moves=[];
+
+	for (var i=0;i<availSpots.length;i++) {
+		var move={};
+		move.index = newBoard[availSpots[i]];
+		newBoard[availSpots[i]]=player;
+		if (player==com) {
+			var	result=minimax(newBoard, huPlayer);
+			move.score=result.score;
+			console.log(result);
+		}else {
+			var result=minimax(newBoard, com);
+			move.score=result.score;
+			console.log(result);
+		}
+		newBoard[availSpots[i]] = move.index;
+		moves.push(move);
+	}
+	console.log(moves);
+	var bestMove;
+	if (player === com) {
+		var bestScore = -10000;
+		for (var i = 0;i<moves.length;i++) {
+			if (moves[i].score>bestScore) {
+				bestScore=moves[i].score;
+				bestMove=i;
+			}
+		}
+	}else{
+		var bestScore = 10000;
+		for (var i = 0;i<moves.length;i++) {
+			if (moves[i].score>bestScore) {
+				bestScore=moves[i].score;
+				bestMove=i;
+			}
+		}
+	}
+	return moves[bestMove];
+
 }
