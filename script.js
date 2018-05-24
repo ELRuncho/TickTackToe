@@ -1,6 +1,6 @@
 var initialBoard;
-var huPlayer= 'X';
-var com= 'O';
+var huPlayer = 'X';
+var com = 'O';
 const winers=[
 	[0, 1, 2],
 	[3, 4, 5],
@@ -66,7 +66,11 @@ function noOneWins(){
 }
 
 function bestSlot(){
-	return minimax(initialBoard,com).index;
+	/*minimax(initialBoard, com).index;*/
+	var availSpots=emptySlots();
+	var max = availSpots.length - 1;
+	var s = Math.floor(Math.random() * max);
+	return emptySlots()[s];
 }
 
 function turnClick(slot){
@@ -108,57 +112,56 @@ function gameOver(win){
 	declareWiner(win.player==huPlayer ? "You Win." : "Skynet Wins.")
 }
 
-function minimax(newBoard, player){
+/*function minimax(newBoard, player){
 	var availSpots=emptySlots();
 	
 	if (verifyWin(newBoard, huPlayer)){
-		console.log("-10 here");
 		return {score: -10};
 	}else if(verifyWin(newBoard, com)){
-		console.log("10 here");
 		return {score: 10};
-	}else if(availSpots.length===0){
-		console.log("0 here");
+	}else if(availSpots.length === 0){
 		return {score: 0};
 	}
-
+	
 	var moves=[];
 
-	for (var i=0;i<availSpots.length;i++) {
+	for (var i=0; i < availSpots.length; i++) {
 		var move={};
 		move.index = newBoard[availSpots[i]];
-		newBoard[availSpots[i]]=player;
-		if (player==com) {
-			var	result=minimax(newBoard, huPlayer);
-			move.score=result.score;
-			console.log(result);
-		}else {
-			var result=minimax(newBoard, com);
-			move.score=result.score;
-			console.log(result);
+		newBoard[availSpots[i]] = player;
+
+		if (player == com) {
+			var	result = minimax(newBoard, huPlayer);
+			move.score = result.score;	
+		} else {
+			var result = minimax(newBoard, com);
+			move.score = result.score;
+			
 		}
 		newBoard[availSpots[i]] = move.index;
+
 		moves.push(move);
 	}
-	console.log(moves);
+
 	var bestMove;
 	if (player === com) {
 		var bestScore = -10000;
-		for (var i = 0;i<moves.length;i++) {
-			if (moves[i].score>bestScore) {
-				bestScore=moves[i].score;
-				bestMove=i;
+		for (var i = 0 ; i < moves.length; i++) {
+			if (moves[i].score > bestScore) {
+				bestScore = moves[i].score;
+				bestMove = i;
 			}
 		}
 	}else{
 		var bestScore = 10000;
-		for (var i = 0;i<moves.length;i++) {
-			if (moves[i].score>bestScore) {
-				bestScore=moves[i].score;
-				bestMove=i;
+		for (var i = 0;i < moves.length; i++) {
+			if (moves[i].score > bestScore) {
+				bestScore = moves[i].score;
+				bestMove = i;
 			}
 		}
 	}
+	console.log(bestMove);
 	return moves[bestMove];
 
-}
+}*/
