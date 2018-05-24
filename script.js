@@ -32,6 +32,7 @@ circle.onclick=function(){
 }
 
 const slots=document.querySelectorAll('.slot');
+
 startGame();
 
 function startGame(){
@@ -39,6 +40,7 @@ function startGame(){
 	initialBoard=Array.from(Array(9).keys());
 	for(var i=0;i<slots.length;i++){
 		slots[i].innerText='';
+		slots[i].removeAttribute("style");
 		slots[i].className='slot';
 		slots[i].addEventListener('click',turnClick,false);
 	}
@@ -55,7 +57,7 @@ function emptySlots(){
 
 function noOneWins(){
 	if (emptySlots().length==0){
-		for (var i=0; slots.leng;i++) {
+		for (var i=0; i<slots.length;i++) {
 			slots[i].style.backgroundColor="green";
 			slots[i].removeEventListener('click', turnClick, false);
 		}
@@ -76,7 +78,7 @@ function bestSlot(){
 function turnClick(slot){
 	if (typeof initialBoard[slot.target.id]=='number') {
 		turn(slot.target.id, huPlayer);
-		if (!noOneWins()) turn(bestSlot(), com);
+		if (!verifyWin(initialBoard, huPlayer)&& !noOneWins()) turn(bestSlot(), com);
 	}	
 }
 
